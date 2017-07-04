@@ -1,8 +1,6 @@
-const { welcome, niceDay, asList } = require('./messages.ini')
+const { hello, niceDay } = require('./messages.ini')
 
 console.log(
-  asList(
-    welcome('Mark'),
-    niceDay
-  )
+  hello('Mark'),
+  niceDay
 )

@@ -2,13 +2,13 @@
   "name": "example",
   "version": "0.1.0",
   "scripts": {
-    "test": "webpack && node bundle"
+    "build": "webpack",
+    "start": "node bundle"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.5.2",
-    "i18n-ini-loader": "^0.1.0",
     "webpack": "^3.0.0"
   }
 }
