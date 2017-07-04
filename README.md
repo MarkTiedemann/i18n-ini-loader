@@ -44,6 +44,11 @@ module.exports = {
     ]
   }
 }
+
+// Note: Since the resulting output of the `i18n-ini-loader`
+// uses ES6 template strings and arrow functions (see below),
+// you may want to chain the `babel-loader` for ES5 support.
+// Check out the `/example` directory for an example config.
 ```
 
 **Output:**
@@ -57,7 +62,7 @@ module.exports = {
 
 **Usage:**
 
-`Component.js`
+`Welcome.jsx`
 ```jsx
 import { welcome, niceDay } from './messages.ini'
 
