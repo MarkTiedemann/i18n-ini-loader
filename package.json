@@ -1,6 +1,6 @@
 {
   "name": "i18n-ini-loader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Webpack I18n loader based on .ini files.",
   "main": "index.js",
   "keywords": [
@@ -15,5 +15,15 @@
   "dependencies": {
     "ini": "^1.3.4",
     "loader-utils": "^1.1.0"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkTiedemann/i18n-ini-loader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MarkTiedemann/i18n-ini-loader/issues"
+  },
+  "homepage": "https://github.com/MarkTiedemann/i18n-ini-loader"
 }
