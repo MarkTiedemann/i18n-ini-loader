@@ -6,7 +6,7 @@ const babelLoader = {
 }
 
 const i18nIniLoader = {
-  loader: '../index.js',
+  loader: 'i18n-ini-loader',
   options: {
     language: 'de'
   }
