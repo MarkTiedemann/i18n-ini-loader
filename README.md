@@ -14,13 +14,13 @@ npm install i18n-ini-loader
 
 `messages.ini`
 ```ini
-[welcome]
-en=Welcome, ${user}!
-de=Willkommen, ${user}!
+[hello]
+en=Hello, ${name}!
+de=Hallo, ${name}!
 
 [niceDay]
-en=Have a nice day!
-de=Hab einen schönen Tag!
+en=Have a nice day.
+de=Hab einen schönen Tag.
 ```
 
 **Config:**
@@ -45,18 +45,18 @@ module.exports = {
   }
 }
 
-// Note: Since the resulting output of the `i18n-ini-loader`
-// uses ES6 template strings and arrow functions (see below),
-// you may want to chain the `babel-loader` for ES5 support.
-// Check out the `/example` directory for an example config.
+// Note: Since the output of the `i18n-ini-loader` uses ES6 template strings
+// and arrow functions (see below), you may want to chain the `babel-loader`
+// for ES5 support.
+// Check out the `/example` directory for a simple example config.
 ```
 
 **Output:**
 
 ```js
 module.exports = {
-  welcome: (user) => `Willkommen, ${user}!`,
-  niceDay: 'Hab einen schönen Tag!'
+  welcome: (name) => `Hallo, ${name}!`,
+  niceDay: 'Hab einen schönen Tag.'
 }
 ```
 
@@ -64,16 +64,21 @@ module.exports = {
 
 `Welcome.jsx`
 ```jsx
-import { welcome, niceDay } from './messages.ini'
+import { hello, niceDay } from './messages.ini'
 
-export default function Welcome({ user }) {
+export default function Welcome({ name }) {
   return (
     <div>
-      <h1>{welcome(user)}</h1>
+      <h1>{hello(name)}</h1>
       <span>{niceDay}</span>
     </div>
   )
 }
+
+// <div>
+//   <h1>Hallo, Mark!</h1>
+//   <span>Hab einen schönen Tag.</span>
+// </div>
 ```
 
 ## License
