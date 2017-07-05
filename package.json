@@ -1,6 +1,6 @@
 {
   "name": "i18n-ini-loader",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Webpack I18n loader based on .ini files.",
   "main": "index.js",
   "keywords": [

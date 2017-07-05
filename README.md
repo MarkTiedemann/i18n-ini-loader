@@ -56,7 +56,7 @@ module.exports = {
 
 ```js
 module.exports = {
-  welcome: (name) => `Hallo, ${name}!`,
+  hello: (name) => `Hallo, ${name}!`,
   niceDay: 'Hab einen schönen Tag.'
 }
 ```
