@@ -9,7 +9,8 @@ const i18nIniLoader = { /*
   loader: 'i18n-ini-loader', */
   loader: '../index.js',
   options: {
-    language: 'de'
+    language: 'de',
+    failOnMissingTranslation: true
   }
 }
 

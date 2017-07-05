@@ -1,38 +1,61 @@
 const ini = require('ini')
-const loaderUtils = require('loader-utils')
 
-const transform = string => {
-  const regex =  /\$\{(.*?)\}/g
+const collectMatchingGroups = (regex, string) => {
 
-  const parameters = []
-  let result
-  while (result = regex.exec(string))
-    parameters.push(result[1])
+  const groups = []
 
-  return parameters.length
-    ? `(${parameters.join(', ')}) => \`${string}\``
-    : `'${string}'`
+  let match
+  while (match = regex.exec(string))
+    groups.push(match[1])
+
+  return groups
+}
+
+const transform = message => {
+
+  const findParameters = /\$\{(.*?)\}/g
+  const parameters = collectMatchingGroups(findParameters, message)
+  const hasParameters = parameters.length > 0
+
+  return hasParameters
+    ? `(${parameters.join(', ')}) => \`${message}\``
+    : `'${message}'`
+}
+
+const getMessage = ({ section, messages, options, loader }) => {
+
+  const message = messages[options.language]
+
+  if (message !== undefined)
+    return message
+
+  if (!options.failOnMissingTranslation)
+    return ''
+
+  throw new Error(`Missing translation for language '${options.language}' `
+    + `in section '${section}': ${loader.request}`)
 }
 
 module.exports = function I18nIniLoader(source) {
-  
-  const { language } = Object.assign(
-    { language: 'en' },
-  	loaderUtils.getOptions(this)
+
+  const options = Object.assign(
+    {
+      language: 'en',
+      failOnMissingTranslation: true
+    },
+    this.query
   )
 
-  try {
-    
-    const messages = Object.entries(
-      ini.parse(source)
-    )
-    .map(([key, value]) => `  ${key}: ${transform(value[language])}`)
-    .join(',\n')
+  const messages = Object.entries(
+    ini.parse(source)
+  )
+  .map(entry => {
+    const [ section, messages ] = entry
+    const message = getMessage({ section, messages, options, loader: this })
+    const messageOrFunction = transform(message)
+    return `  ${section}: ${messageOrFunction}`
+  })
+  .join(',\n')
 
-    return `module.exports = {\n${messages}\n}`
-
-  } catch (e) {
-    throw new Error('An unexpected error occured:', e)
-  }
-
+  return `module.exports = {\n${messages}\n}`
 }

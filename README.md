@@ -36,7 +36,8 @@ module.exports = {
           {
             loader: 'i18n-ini-loader',
             options: {
-              language: 'de'
+              language: 'de',
+              failOnMissingTranslation: true
             }
           }
         ]
@@ -80,6 +81,11 @@ export default function Welcome({ name }) {
 //   <span>Hab einen schönen Tag.</span>
 // </div>
 ```
+
+## Options
+
+- **`language`**: the language key used for translation (*default*: `en`)
+- **`failOnMissingTranslation`**: whether an `Error` should be thrown if missing translations are found (*default*: `true`); if `false`, missing translations will be handled gracefully by returning an empty `String` (`''`)
 
 ## License
 
